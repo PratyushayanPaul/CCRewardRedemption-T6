@@ -1,4 +1,4 @@
-package main.java.com.tcs.RewardRedemptionApp.repository;
+package com.tcs.RewardRedemptionApp.Repository;
 
 public class RewardRepository {
 }

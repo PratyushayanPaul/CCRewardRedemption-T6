@@ -1,23 +1,27 @@
 package com.tcs.RewardRedemptionApp.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerID;
+    private Integer customerID;
 
     private String customerFirstName;
     private String customerLastName;
+
+    @Column(unique = true)
     private String customerEmail;
-    private Double customerPhone;
+
+    @Column(unique = true)
+    private Long customerPhone;
+
     private LocalDate customerDOB;
     private String customerStatus;
     private LocalDate customerDOJ;

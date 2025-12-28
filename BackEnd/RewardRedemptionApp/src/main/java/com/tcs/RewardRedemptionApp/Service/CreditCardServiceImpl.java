@@ -36,4 +36,16 @@ public class CreditCardServiceImpl {
             System.out.println("Customer not found");
         }
     }
+
+    public CreditCard findCustomerByCC(String creditCardNumber) {
+        CreditCard creditCard = creditCardRepository.findByCreditCardNumber(creditCardNumber);
+        if(creditCard!=null){
+            System.out.println(creditCardNumber);
+            return creditCard;
+        }
+        else{
+            System.out.println("Customer not found");
+            return null;
+        }
+    }
 }

@@ -63,4 +63,37 @@ public class CustomerServiceImpl {
             return customerRepository.findAll();
         }
     }
+
+    public Customer getCustomer(Customer customerID) {
+        if(customerRepository.existsById(customerID.getCustomerID())){
+            Customer customer = customerRepository.findById(customerID.getCustomerID()).get();
+            Customer customer1 = new Customer();
+            customer1.setCustomerID(customer.getCustomerID());
+            customer1.setCustomerFirstName(customer.getCustomerFirstName());
+            customer1.setCustomerLastName(customer.getCustomerLastName());
+            customer1.setCustomerEmail(customer.getCustomerEmail());
+            customer1.setCustomerPhone(customer.getCustomerPhone());
+            customer1.setCustomerDOB(customer.getCustomerDOB());
+            customer1.setCustomerDOJ(customer.getCustomerDOJ());
+            customer1.setCustomerStatus(customer.getCustomerStatus());
+            customer1.setCustomerType(customer.getCustomerType());
+            return customer1;
+        }
+        else{
+            System.out.println("Customer does not exist");
+            return null;
+        }
+    }
+
+        public Customer findCustomerByName(String firstName, String lastName) {
+            Customer customer = customerRepository.findByCustomerFirstNameAndCustomerLastName(firstName, lastName);
+            if(customer!=null){
+                return customer;
+            }
+            else {
+                System.out.println("Customer does not exist");
+                return null;
+            }
+        }
+
 }

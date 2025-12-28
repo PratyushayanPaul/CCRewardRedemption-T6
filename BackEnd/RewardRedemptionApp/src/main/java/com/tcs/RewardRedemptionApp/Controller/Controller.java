@@ -1,16 +1,16 @@
 package com.tcs.RewardRedemptionApp.Controller;
 
 import com.tcs.RewardRedemptionApp.Dto.CustomerDTO;
+import com.tcs.RewardRedemptionApp.Entity.Customer;
 import com.tcs.RewardRedemptionApp.Service.CustomerServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
-@RequestMapping("/userRegister")
+@RequestMapping("/CCReward")
 public class Controller {
 
     private final CustomerServiceImpl customerService;
@@ -25,5 +25,18 @@ public class Controller {
         Integer customerID = customerService.custReg(customerDTO);
         //String successMessage = customerService.getBookingSuccessMessage(bookingID);
         return ResponseEntity.status(201).body(customerID);
+    }
+
+    @PutMapping("/delete/{customerID}")
+    public ResponseEntity<String> customerDelete(@PathVariable Integer customerID){
+        customerService.deleteCust(customerID);
+        String message = customerID + " has been deleted successfully";
+        return ResponseEntity.status(200).body(message);
+    }
+
+    @GetMapping("/allcustomer")
+    public ResponseEntity<List<Customer>> getAllCustomer(){
+        List <Customer> customerList = customerService.getAllCust();
+        return ResponseEntity.status(200).body(customerList);
     }
 }

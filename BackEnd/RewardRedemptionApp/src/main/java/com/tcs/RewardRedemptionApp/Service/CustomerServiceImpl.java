@@ -7,6 +7,7 @@ import com.tcs.RewardRedemptionApp.Repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -39,5 +40,27 @@ public class CustomerServiceImpl {
         customer.setCustomerStatus("ACTIVE");
         Customer customer1 = customerRepository.save(customer);
         return customer1.getCustomerID();
+    }
+
+    public void deleteCust(Integer customerID) {
+        if(!customerRepository.existsById(customerID)){
+            //throw new CustomerDoesNotExist("Customer does not exist");
+            System.out.println("Customer does not exist");
+        }
+        else {
+            Customer customer = customerRepository.findById(customerID).get();
+            customer.setCustomerStatus("INACTIVE");
+            customerRepository.save(customer);
+        }
+    }
+
+    public List<Customer> getAllCust() {
+        if(customerRepository.findAll().isEmpty()) {
+            System.out.println("No customer found");
+            return null;
+        }
+        else{
+            return customerRepository.findAll();
+        }
     }
 }

@@ -4,14 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
 public class CreditCard {
 
     @Id
-    private Double creditCardNumber;
+    private String creditCardNumber;
 
     private String creditCardHolderName;
     private Integer creditCardCvv;

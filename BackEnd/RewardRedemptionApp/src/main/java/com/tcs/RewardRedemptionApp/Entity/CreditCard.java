@@ -1,9 +1,6 @@
 package com.tcs.RewardRedemptionApp.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -11,6 +8,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 public class CreditCard {
+
 
     @Id
     private String creditCardNumber;
@@ -21,5 +19,6 @@ public class CreditCard {
     private Double rewardPoints;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    Customer customerID;
+    @JoinColumn(name = "customerid")
+    private Customer customer;
 }

@@ -78,8 +78,8 @@ public class CustomerController {
 
         if (creditCardNumber != null) {
             CreditCard card = creditCardService.findCustomerByCC(creditCardNumber);
-            return ResponseEntity.ok(
-                    customerService.getCustomer(card.getCustomerID()));
+            Customer customer = card.getCustomer();
+            return ResponseEntity.ok(customer);
         }
 
         if (firstName != null && lastName != null) {

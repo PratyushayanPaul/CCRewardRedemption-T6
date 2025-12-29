@@ -1,4 +1,4 @@
-package com.tcs.RewardRedemptionApp.repository;
+package com.tcs.RewardRedemptionApp.Repository;
 
 import com.tcs.RewardRedemptionApp.Entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;

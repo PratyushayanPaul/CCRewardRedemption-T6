@@ -1,0 +1,5 @@
+{
+  "name": "Reward Redemption App",
+  "description": "Frontend for Reward Redemption Spring Boot Application. Manages Customers, Credit Cards, and Transactions.",
+  "requestFramePermissions": []
+}

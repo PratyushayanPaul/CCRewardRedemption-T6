@@ -7,8 +7,11 @@ import com.tcs.RewardRedemptionApp.Service.CreditCardServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/CCReward")
+@CrossOrigin(origins = "*")
 public class CreditCardController {
 
     private final CreditCardServiceImpl creditCardService;
@@ -23,4 +26,15 @@ public class CreditCardController {
         String message = creditCardDTO.getCreditCardNumber() + " has been added successfully";
         return ResponseEntity.status(200).body(message);
     }
+
+    @GetMapping("getCC/{customerID}")
+    public ResponseEntity<List<CreditCardDTO>> getCustomerCreditCards(
+            @PathVariable Integer customerID) {
+
+        List<CreditCardDTO> creditCards =
+                creditCardService.getCustomerCreditCards(customerID);
+
+        return ResponseEntity.status(200).body(creditCards);
+    }
+
 }

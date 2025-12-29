@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/CCReward")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
     private final CustomerServiceImpl customerService;

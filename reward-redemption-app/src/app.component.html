@@ -1,0 +1,119 @@
+<div class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-emerald-400 rounded-lg flex items-center justify-center font-bold text-white shadow-inner">
+          R
+        </div>
+        <h1 class="font-bold text-xl tracking-tight">Reward<span class="text-blue-300">Redemption</span></h1>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <div class="hidden md:flex flex-col items-end">
+           <div class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Turn Points into Possibilities</div>
+           <!-- Connection Status Badge -->
+           @if (api.isMockMode()) {
+             <span class="inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20">
+               ⚠️ Mock Mode (Offline)
+             </span>
+           } @else {
+             <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20">
+               ● Connected
+             </span>
+           }
+        </div>
+        
+        <!-- Settings Button -->
+        <button (click)="openSettings()" class="p-2 text-slate-400 hover:text-white transition-colors rounded-full hover:bg-slate-800" title="Connection Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-header Navigation -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="container mx-auto px-4">
+      <nav class="flex gap-6">
+        <button 
+          (click)="setView('customers')"
+          class="py-4 text-sm font-medium border-b-2 transition-colors duration-200"
+          [class.border-blue-500]="currentView === 'customers'"
+          [class.text-blue-600]="currentView === 'customers'"
+          [class.border-transparent]="currentView !== 'customers'"
+          [class.text-slate-500]="currentView !== 'customers'"
+          [class.hover:text-slate-800]="currentView !== 'customers'"
+        >
+          Customers & Cards
+        </button>
+        <button 
+          (click)="setView('transactions')"
+          class="py-4 text-sm font-medium border-b-2 transition-colors duration-200"
+          [class.border-indigo-500]="currentView === 'transactions'"
+          [class.text-indigo-600]="currentView === 'transactions'"
+          [class.border-transparent]="currentView !== 'transactions'"
+          [class.text-slate-500]="currentView !== 'transactions'"
+          [class.hover:text-slate-800]="currentView !== 'transactions'"
+        >
+          Transactions
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  @if (api.loading()) {
+    <div class="absolute top-0 left-0 w-full h-1 bg-slate-100 z-50">
+      <div class="h-full bg-blue-500 animate-loading-bar"></div>
+    </div>
+    <style>
+      @keyframes loading-bar { 0% { width: 0%; margin-left: 0; } 50% { width: 40%; } 100% { width: 0%; margin-left: 100%; } }
+      .animate-loading-bar { animation: loading-bar 1.5s infinite ease-in-out; }
+    </style>
+  }
+
+  <!-- Error Toast -->
+  @if (api.error()) {
+    <div (click)="api.clearError()" class="cursor-pointer fixed bottom-4 right-4 bg-red-600 text-white px-6 py-3 rounded shadow-lg z-50 animate-in fade-in slide-in-from-bottom-4 hover:bg-red-700 transition-colors flex items-center justify-between gap-4">
+      <span>{{ api.error() }}</span>
+      <span class="text-red-200 text-xs font-bold uppercase tracking-wider">Dismiss</span>
+    </div>
+  }
+
+  <!-- Main Content -->
+  <main class="flex-1 bg-slate-50 p-4 md:p-8">
+    <div class="container mx-auto max-w-6xl">
+      @if (currentView === 'customers') {
+        <app-customer-manager />
+      } @else {
+        <app-transaction-manager />
+      }
+    </div>
+  </main>
+  
+  <!-- Settings Modal -->
+  @if (showSettings()) {
+    <div class="fixed inset-0 bg-slate-900/50 z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
+        <h3 class="text-lg font-bold mb-4 text-slate-800">Connection Settings</h3>
+        <p class="text-sm text-slate-500 mb-4">
+          Configure the Backend API URL. If you are running locally, use <code>http://localhost:9090</code>.
+        </p>
+        
+        <div class="mb-4">
+          <label class="block text-xs font-bold text-slate-700 mb-1">API Base URL</label>
+          <input [(ngModel)]="tempUrl" type="text" class="w-full border border-slate-300 rounded px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 outline-none" placeholder="http://localhost:9090">
+        </div>
+        
+        <div class="flex justify-end gap-3">
+          <button (click)="showSettings.set(false)" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded text-sm">Cancel</button>
+          <button (click)="saveSettings()" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded text-sm">Save & Connect</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

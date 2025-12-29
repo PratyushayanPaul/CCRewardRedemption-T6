@@ -20,4 +20,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
             String customerLastName
     );
 
+    Customer findByCustomerID(Integer customerID);
 }

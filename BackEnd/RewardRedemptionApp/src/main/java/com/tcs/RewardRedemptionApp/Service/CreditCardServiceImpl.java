@@ -5,8 +5,13 @@ import com.tcs.RewardRedemptionApp.Entity.CreditCard;
 import com.tcs.RewardRedemptionApp.Entity.Customer;
 
 import com.tcs.RewardRedemptionApp.Repository.CustomerRepository;
-import com.tcs.RewardRedemptionApp.repository.CreditCardRepository;
+import com.tcs.RewardRedemptionApp.Repository.CreditCardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CreditCardServiceImpl {
@@ -49,4 +54,28 @@ public class CreditCardServiceImpl {
             return null;
         }
     }
+    public List<CreditCardDTO> getCustomerCreditCards(Integer customerID) {
+
+        Customer customer = customerRepository.findByCustomerID(customerID);
+        if (customer == null) {
+            throw new RuntimeException(
+                    "Customer not found with ID: " + customerID);
+        }
+
+        List<CreditCard> cards =
+                creditCardRepository.findByCustomer(customer);
+
+        List<CreditCardDTO> dtoList = new ArrayList<>();
+
+        for (CreditCard card : cards) {
+            CreditCardDTO dto = new CreditCardDTO();
+            dto.setCreditCardNumber(card.getCreditCardNumber());
+            dto.setCreditCardHolderName(card.getCreditCardHolderName());
+            dto.setCreditCardExpiry(card.getCreditCardExpiry());
+            dto.setCreditCardCvv(card.getCreditCardCvv());
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
 }
+

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class CreditCardDTO {
 
     private String creditCardNumber;
-
     private String creditCardHolderName;
     private Integer creditCardCvv;
     private LocalDate creditCardExpiry;

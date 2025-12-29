@@ -3,8 +3,9 @@ package com.tcs.RewardRedemptionApp.Service;
 import com.tcs.RewardRedemptionApp.Dto.CreditCardDTO;
 import com.tcs.RewardRedemptionApp.Entity.CreditCard;
 import com.tcs.RewardRedemptionApp.Entity.Customer;
-import com.tcs.RewardRedemptionApp.Repository.CreditCardRepository;
+
 import com.tcs.RewardRedemptionApp.Repository.CustomerRepository;
+import com.tcs.RewardRedemptionApp.repository.CreditCardRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +24,7 @@ public class CreditCardServiceImpl {
         if (customerRepository.findById(customerID).isPresent()) {
             Customer customer = customerRepository.findById(customerID).get();
             CreditCard creditCard = new CreditCard();
-            creditCard.setCustomerID(customer);
+            creditCard.setCustomer(customer);
             creditCard.setCreditCardNumber(creditCardDTO.getCreditCardNumber());
             creditCard.setCreditCardHolderName(creditCardDTO.getCreditCardHolderName());
             creditCard.setCreditCardExpiry(creditCardDTO.getCreditCardExpiry());

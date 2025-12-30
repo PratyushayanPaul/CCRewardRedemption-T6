@@ -1,16 +1,19 @@
 package com.tcs.RewardRedemptionApp.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class RewardPoint {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer serialNo;
+
     @OneToOne(fetch = FetchType.LAZY)
     CreditCard creditCardNumber;
 
     private Double points;
+
 }

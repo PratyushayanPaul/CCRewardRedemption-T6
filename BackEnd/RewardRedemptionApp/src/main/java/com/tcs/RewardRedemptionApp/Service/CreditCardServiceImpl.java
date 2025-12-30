@@ -4,7 +4,7 @@ import com.tcs.RewardRedemptionApp.Dto.CreditCardDTO;
 import com.tcs.RewardRedemptionApp.Entity.CreditCard;
 import com.tcs.RewardRedemptionApp.Entity.Customer;
 import com.tcs.RewardRedemptionApp.Repository.CreditCardRepository;
-import com.tcs.RewardRedemptionApp.Repository.CustomerRepository;
+import com.tcs.RewardRedemptionApp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,7 +28,7 @@ public class CreditCardServiceImpl {
             creditCard.setCreditCardHolderName(creditCardDTO.getCreditCardHolderName());
             creditCard.setCreditCardExpiry(creditCardDTO.getCreditCardExpiry());
             creditCard.setCreditCardCvv(creditCardDTO.getCreditCardCvv());
-            creditCard.setRewardPoints(0.0);
+           // creditCard.setRewardPoints(0.0);
 
             CreditCard creditCardSaved = creditCardRepository.save(creditCard);
         }

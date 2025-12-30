@@ -3,7 +3,7 @@ package com.tcs.RewardRedemptionApp.Service;
 import com.tcs.RewardRedemptionApp.Dto.CustomerDTO;
 import com.tcs.RewardRedemptionApp.Entity.Customer;
 import com.tcs.RewardRedemptionApp.Enum.CustomerType;
-import com.tcs.RewardRedemptionApp.Repository.CustomerRepository;
+import com.tcs.RewardRedemptionApp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

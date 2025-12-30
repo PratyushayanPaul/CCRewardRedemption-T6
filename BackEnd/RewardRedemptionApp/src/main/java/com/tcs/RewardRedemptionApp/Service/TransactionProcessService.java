@@ -1,5 +1,5 @@
 package com.tcs.RewardRedemptionApp.Service;
 
-public interface TransactionService {
+public interface TransactionProcessService {
     public boolean processTransactions();
 }

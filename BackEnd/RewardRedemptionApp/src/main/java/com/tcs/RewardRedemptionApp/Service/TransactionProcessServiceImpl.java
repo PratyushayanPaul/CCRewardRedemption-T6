@@ -6,7 +6,7 @@ import com.tcs.RewardRedemptionApp.Entity.Transactions;
 import com.tcs.RewardRedemptionApp.Enum.CustomerType;
 import com.tcs.RewardRedemptionApp.exception.CCRewardRedemption;
 import com.tcs.RewardRedemptionApp.repository.RewardRepository;
-import com.tcs.RewardRedemptionApp.repository.TransactionRepository;
+import com.tcs.RewardRedemptionApp.repository.TransactionProcessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcs.RewardRedemptionApp.Repository.CreditCardRepository;
@@ -14,13 +14,13 @@ import com.tcs.RewardRedemptionApp.Repository.CreditCardRepository;
 import java.util.List;
 
 @Service
-public class TransactionServiceImpl implements TransactionService{
-    private final TransactionRepository transactionRepository;
+public class TransactionProcessServiceImpl implements TransactionProcessService {
+    private final TransactionProcessRepository transactionRepository;
     private final CreditCardRepository creditCardRepository;
     private final RewardRepository rewardRepository;
 
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository,CreditCardRepository creditCardRepository,RewardRepository rewardRepository){
+    public TransactionProcessServiceImpl(TransactionProcessRepository transactionRepository, CreditCardRepository creditCardRepository, RewardRepository rewardRepository){
         this.transactionRepository=transactionRepository;
         this.creditCardRepository = creditCardRepository;
         this.rewardRepository=rewardRepository;

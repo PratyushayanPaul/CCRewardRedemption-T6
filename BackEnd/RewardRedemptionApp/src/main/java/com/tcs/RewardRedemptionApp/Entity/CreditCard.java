@@ -9,16 +9,14 @@ import java.time.LocalDate;
 @Data
 public class CreditCard {
 
-
     @Id
     private String creditCardNumber;
 
     private String creditCardHolderName;
     private Integer creditCardCvv;
     private LocalDate creditCardExpiry;
-    private Double rewardPoints;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerid")
+    @JoinColumn(name="customerid")
     private Customer customer;
 }

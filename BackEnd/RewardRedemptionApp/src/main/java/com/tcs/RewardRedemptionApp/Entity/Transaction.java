@@ -13,7 +13,6 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id")
     private Long transactionId;
 
     private double amount;
@@ -23,8 +22,9 @@ public class Transaction {
 
     @Column(name = "transaction_date",nullable = false)
     private LocalDateTime transactionDate;
+    private String transactionDetails;
 
     @ManyToOne
-    @JoinColumn(name="credit_card_number")
+    @JoinColumn(name="credit_card_number", referencedColumnName = "creditCardNumber", nullable = false)
     private CreditCard creditCard;
 }

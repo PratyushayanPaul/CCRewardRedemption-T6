@@ -29,7 +29,7 @@ public class CreditCardServiceImpl {
             creditCard.setCreditCardHolderName(creditCardDTO.getCreditCardHolderName());
             creditCard.setCreditCardExpiry(creditCardDTO.getCreditCardExpiry());
             creditCard.setCreditCardCvv(creditCardDTO.getCreditCardCvv());
-            creditCard.setRewardPoints(0.0);
+            //creditCard.setRewardPoints(0.0);
 
             CreditCard creditCardSaved = creditCardRepository.save(creditCard);
         }
